@@ -15,12 +15,12 @@ def build_parser():
     parser.add_argument('-p', '--password', required=True, type=str, dest='password')
     parser.add_argument('-a', '--authfile', required=False, type=str, dest='authfile')
     #Root racadm command - currently only getsensorinfo is supported
-    parser.add_argument('-C', '--command', required=True, type=str, dest='cmd', default="getsensorinfo")
+    parser.add_argument('-C', '--command', required=False, type=str, dest='cmd', default="getsensorinfo")
     #Include perfdata in output? True or False
     parser.add_argument('-f', '--perfdata', required=False, type=bool, dest='perfdata', default=False)
     # Use 'all' to return data for all sensor types at once
     # Valid sensor types: battery, current, intrusion, memory, performance, processor, redundancy, sd_card, voltage
-    parser.add_argument('-s', '--sensortype', required=False, type=str, dest='sensor', default="all")
+    parser.add_argument('-s', '--sensortype', required=False, type=str, dest='sensor', default='all')
     parser.add_argument('-d', '--debug', required=False, type=bool, dest='debug', default=False)
 
     return parser
@@ -28,7 +28,6 @@ def build_parser():
 def main():
     global debug
 
-    debug = args.debug
 
     if not racadm_exists():
 	print "ERROR: 'racadm' not found. If it's installed, try a symlink to /sbin:\nln -s /opt/dell/srvadmin/sbin/racadm /sbin/racadm\n"
@@ -36,6 +35,8 @@ def main():
 
     parser = build_parser()
     args = parser.parse_args()
+
+    debug = args.debug
 
     if validate_arguments(args):
 	host = args.host
@@ -57,7 +58,7 @@ def main():
 	    if debug:
 	        print json.dumps(parsed, sort_keys=True, indent=4)
 	    
-	    print "Nagios: ", nagios_output(parsed, sensor, perfdata)
+	    print nagios_output(parsed, sensor, perfdata)
 	else:
 	    print "No response from iDRAC!"
     else:
