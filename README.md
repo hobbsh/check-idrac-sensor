@@ -32,14 +32,14 @@ usage: check-idrac-sensor.py [-h] -H HOST -u USERNAME -p PASSWORD
 ```
 
 ##Bugs
--If you encounter a problem, please open an issue and I will do my best to help
+- If you encounter a problem, please open an issue and I will do my best to help
 
 ##Known Issues/Compatibility
--Sometimes racadm responds with bad username/password when it is really a response issue with the device. Common on older firmware versions. 
--This has only been tested on iDRAC7
--Authfile and perfdata are options but not yet implemented
+- Sometimes racadm responds with bad username/password when it is really a response issue with the device. Common on older firmware versions. 
+- This has only been tested on iDRAC7
+- Authfile and perfdata are options but not yet implemented
 
 ##TODO
--Perfdata for certain sensortypes
--Handle some of the failure cases better
--Implement single/multi sensor return (as opposed to just 'all')
+- Perfdata for certain sensortypes
+- Handle some of the failure cases better
+- Implement single/multi sensor return (as opposed to just 'all')
