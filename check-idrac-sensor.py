@@ -31,7 +31,7 @@ def main():
 
     if not racadm_exists():
 	print "ERROR: 'racadm' not found. If it's installed, try a symlink to /sbin:\nln -s /opt/dell/srvadmin/sbin/racadm /sbin/racadm\n"
-	sys.exit(1)
+	sys.exit(3)
 
     parser = build_parser()
     args = parser.parse_args()
@@ -63,7 +63,7 @@ def main():
 	    print "No response from iDRAC!"
     else:
         print "ERROR: Invalid command or sensortype. Please check that command or sensortype is valid. Exiting...\n"
-        sys.exit(1)
+        sys.exit(3)
 
 	
 def clean_lines(data):
