@@ -210,7 +210,9 @@ def query_idrac(host, user, password, command):
     rcode, output, error = exec_command(command)
 
     if rcode and error:
-        print "ERROR: encountered a problem running racadm command" + str(error) + "\n"
+        error = re.sub('ERROR:\s', '', error)
+        print "ERROR: encountered a problem running racadm command. " + str(error) + "\n"
+        sys.exit(3)
     else:
 	return output
 
